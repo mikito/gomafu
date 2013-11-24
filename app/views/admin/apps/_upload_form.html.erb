@@ -1,0 +1,4 @@
+<%= form_tag(upload_admin_app_path(app), :multipart => true) do %>
+  <%= file_field :app, :contents %>
+  <%= submit_tag "Send" %>
+<% end %>

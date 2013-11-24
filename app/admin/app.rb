@@ -14,4 +14,33 @@ ActiveAdmin.register App do
   #  permitted
   # end
   
+  permit_params do
+    permitted = [:name]
+    permitted
+  end
+  
+  form do |f|
+    f.inputs do
+      f.input :name
+    end
+
+    f.actions
+  end
+
+  show do 
+    attributes_table do
+      row :id
+      row :name
+      row :created_at
+      row :updated_at
+    end
+
+    render :partial => "upload_form", :locals => {:app => app}
+
+    render :partial => "files", :locals => {:files => app.files}
+  end
+
+  member_action :upload, :method => :post do
+    render :text => "upload"
+  end
 end
