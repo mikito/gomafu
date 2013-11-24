@@ -1,0 +1,26 @@
+<html>
+<head>
+  <title><%= @app.name %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <link rel="apple-touch-icon-precomposed.png" href="apple-touch-icon-precomposed.png"/>
+  <script type="text/javascript">
+     window.onload = function() {
+       var contents = document.getElementById("contents");
+       if( window.navigator.standalone ) {
+         contents.innerHTML = appHTML;
+       }else{
+         contents.innerHTML = downloadHTML;
+       }
+     }
+      
+var appHTML = '<iframe src="<%= @app.name %>/index.html" frameborder="0" width="100%" height="100%" marginwidth="0" marginheight="0"></iframe>';
+var downloadHTML = 'Add To Home';
+  </script>
+</head>
+	
+<body style="margin:0">
+  <div id="contents"></div>
+</body>
+</html>
