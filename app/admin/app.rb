@@ -80,4 +80,22 @@ ActiveAdmin.register App do
 
     redirect_to admin_app_path(app), :notice => "Contents files are uploaded."
   end
+
+  # Upload Zip File
+  member_action :upload_icon, :method => :post do
+    app = App.find(params[:id])
+    icon_dir = Rails.root.join("public", app.name, "icons")
+
+    FileUtils.mkdir_p(icon_dir)
+
+    icon = params[:app]["icon"]
+
+    File.open(File.join(icon_dir, "icon.png"), 'wb') do |of|
+      of.write(icon.read)
+    end
+
+    app.touch
+
+    redirect_to admin_app_path(app), :notice => "Icon file is uploaded."
+  end
 end
