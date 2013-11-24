@@ -1,6 +1,19 @@
-window.onload = function(){ 
-  var appCache = window.applicationCache;
+var appCache = window.applicationCache;
+var firstCache = appCache.status == appCache.UNCACHED;
 
+window.onload = function(){ 
+  if(window.navigator.standalone) {
+    addCacheEventListener();
+  }
+
+  if (window.navigator.onLine && firstCache == false) {
+    appCache.update();
+  }
+
+  showContents();
+}
+
+function addCacheEventListener() {
   appCache.addEventListener('updateready', function(e) {
     if(confirm('データの更新が完了しました。再読み込みしますか？')){
       appCache.swapCache();
@@ -12,12 +25,20 @@ window.onload = function(){
     alert('データの保存が完了しました');
   }, false);
 
+//  appCache.addEventListener('noupdate', function(e){
+//    alert('noupdate');
+//  }, false);
+
   appCache.addEventListener('downloading', function(e){
-    alert('最新版が見つかったためアップデートします');
+    if(firstCache){
+      alert('アプリデータのダウンロードを開始します');
+    }else{
+      alert('最新版が見つかったためアップデートします');
+    }
   }, false);
 
   appCache.addEventListener('error', function(e){
-    if (navigator.onLine) {
+    if (window.navigator.onLine) {
       alert('データの保存に失敗しました');
     }
   }, false);
@@ -25,13 +46,6 @@ window.onload = function(){
   appCache.addEventListener('progress', function(e){
     console.log("progress");
   }, false)
-
-  if (navigator.onLine) {
-    console.log("update");
-    appCache.update();
-  }
-
-  showContents();
 }
 
 function showContents()
