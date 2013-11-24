@@ -25,3 +25,5 @@ config/database.yml
 !/public/500.html
 !/public/favicon.ico
 !/public/robots.txt
+
+.DS_Store

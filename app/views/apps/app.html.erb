@@ -1,0 +1,14 @@
+<html manifest="<%= @app.name %>.manifest">
+  <head>
+    <title><%= @app.name %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="<%= @app.status_bar_style %>" />
+    <link rel="apple-touch-icon-precomposed" href="<%= @app.name %>/icons/icon.png" />
+    <script type="text/javascript">var appName = "<%= @app.name %>";</script>
+    <script type="text/javascript" src="assets/apps.js"></script>
+  </head>
+  <body style="margin:0">
+    <div id="contents"></div>
+  </body>
+</html>

@@ -1,0 +1,10 @@
+CACHE MANIFEST
+# Version: <%= @app.updated_at %> 
+
+CACHE:
+<%= @app.name %>.app
+<%= @app.name %>/icons/icon.png
+<% @app.files.each do |file| %>
+<%= "#{@app.name}/#{file}" %>
+<% end %>
+/assets/apps.js
