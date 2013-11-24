@@ -1,6 +1,4 @@
 ActiveAdmin.register App do
-
-  
   # See permitted parameters documentation:
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
@@ -14,14 +12,17 @@ ActiveAdmin.register App do
   #  permitted
   # end
   
+  STATUS_BAR_OPTIONS = ['default', 'black', 'black-translucent']
+
   permit_params do
-    permitted = [:name]
+    permitted = [:name, :status_bar_style]
     permitted
   end
   
   form do |f|
     f.inputs do
       f.input :name
+      f.input :status_bar_style, :as => :select, :collection => STATUS_BAR_OPTIONS
     end
 
     f.actions
@@ -32,6 +33,7 @@ ActiveAdmin.register App do
     attributes_table do
       row :id
       row :name
+      row :status_bar_style
       row :created_at
       row :updated_at
     end
