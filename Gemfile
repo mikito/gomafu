@@ -46,6 +46,7 @@ end
 
 gem 'pry-rails'
 gem 'activeadmin', github: 'gregbell/active_admin'
+gem 'zipruby'
 
 group :development do
   gem "annotate", "~> 2.6.0.beta2"

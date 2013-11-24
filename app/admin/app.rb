@@ -27,6 +27,7 @@ ActiveAdmin.register App do
     f.actions
   end
 
+  # Detail Page
   show do 
     attributes_table do
       row :id
@@ -40,7 +41,43 @@ ActiveAdmin.register App do
     render :partial => "files", :locals => {:files => app.files}
   end
 
+  # Upload Zip File
   member_action :upload, :method => :post do
-    render :text => "upload"
+    app = App.find(params[:id])
+    app_dir = Rails.root.join("public", app.name)
+
+    contents = params[:app]["contents"]
+    
+    # remove all
+    FileUtils.rm_rf(app_dir)
+    FileUtils.mkdir_p(app_dir)
+
+    files = Array.new
+
+    Zip::Archive.open_buffer(contents.read) do |ar|
+      ar.each do |zf|
+        next if zf.name.include?("__MACOSX") # Mac OS meta file
+
+        dst = File.join(app_dir, zf.name)
+
+        if zf.directory?
+          FileUtils.mkdir_p(dst)
+        else
+          dirname = File.dirname(dst)
+          FileUtils.mkdir_p(dirname) unless File.exist?(dirname)
+
+          # save contents file list 
+          files << zf.name
+
+          open(dst, 'wb') do |f|
+            f << zf.read
+          end
+        end
+      end
+    end
+
+    app.update(:files => files)
+
+    redirect_to admin_app_path(app), :notice => "Contents files are uploaded."
   end
 end
