@@ -17,19 +17,21 @@ ActiveAdmin.register App do
   index do
     selectable_column
     column "Bundle ID", :bundle_id
+    column :name
     column :created_at
     column :updated_at
     default_actions
   end
 
   permit_params do
-    permitted = [:bundle_id, :status_bar_style]
+    permitted = [:bundle_id, :status_bar_style, :name]
     permitted
   end
   
   form do |f|
     f.inputs do
       f.input :bundle_id, :label => "Bundle ID"#, :input_html => { :disabled => true }
+      f.input :name
       f.input :status_bar_style, :as => :select, :collection => STATUS_BAR_OPTIONS
     end
 
@@ -43,6 +45,7 @@ ActiveAdmin.register App do
         app.bundle_id
       end
 
+      row :name
       row :status_bar_style
       row :created_at
       row :updated_at
