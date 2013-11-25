@@ -12,6 +12,6 @@ class AppsController < ApplicationController
   private
 
   def find_app
-    @app = App.find_by_name(params[:id])
+    @app = App.find_by_bundle_id(params[:id])
   end
 end

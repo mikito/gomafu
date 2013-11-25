@@ -51,7 +51,7 @@ function addCacheEventListener() {
 function showContents()
 {
   var contents = document.getElementById("contents");
-  var appHTML = '<iframe src="' + appName + '/index.html" frameborder="0" width="100%" height="100%" marginwidth="0" marginheight="0"></iframe>';
+  var appHTML = '<iframe src="' + bundleId + '/index.html" frameborder="0" width="100%" height="100%" marginwidth="0" marginheight="0"></iframe>';
   var downloadHTML = 'Add To Home';
 
   if( window.navigator.standalone ) {

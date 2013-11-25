@@ -1,5 +1,5 @@
 <h3>Icon</h3>
-<%= image_tag "/#{app.name}/icons/icon.png" %>
+<%= image_tag "/#{app.bundle_id}/icons/icon.png" %>
 <%= form_tag(upload_icon_admin_app_path(app), :multipart => true) do %>
   <%= file_field :app, :icon%>
   <%= submit_tag "Upload" %>

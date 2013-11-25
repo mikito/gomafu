@@ -14,14 +14,22 @@ ActiveAdmin.register App do
   
   STATUS_BAR_OPTIONS = ['default', 'black', 'black-translucent']
 
+  index do
+    selectable_column
+    column "Bundle ID", :bundle_id
+    column :created_at
+    column :updated_at
+    default_actions
+  end
+
   permit_params do
-    permitted = [:name, :status_bar_style]
+    permitted = [:bundle_id, :status_bar_style]
     permitted
   end
   
   form do |f|
     f.inputs do
-      f.input :name
+      f.input :bundle_id, :label => "Bundle ID"#, :input_html => { :disabled => true }
       f.input :status_bar_style, :as => :select, :collection => STATUS_BAR_OPTIONS
     end
 
@@ -31,8 +39,10 @@ ActiveAdmin.register App do
   # Detail Page
   show do 
     attributes_table do
-      row :id
-      row :name
+      row "Bundle ID" do
+        app.bundle_id
+      end
+
       row :status_bar_style
       row :created_at
       row :updated_at
@@ -46,7 +56,7 @@ ActiveAdmin.register App do
   # Upload Zip File
   member_action :upload, :method => :post do
     app = App.find(params[:id])
-    app_dir = Rails.root.join("public", app.name)
+    app_dir = Rails.root.join("public", app.bundle_id)
 
     contents = params[:app]["contents"]
     
@@ -86,7 +96,7 @@ ActiveAdmin.register App do
   # Upload Zip File
   member_action :upload_icon, :method => :post do
     app = App.find(params[:id])
-    icon_dir = Rails.root.join("public", app.name, "icons")
+    icon_dir = Rails.root.join("public", app.bundle_id, "icons")
 
     FileUtils.mkdir_p(icon_dir)
 
