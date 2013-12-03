@@ -9,6 +9,10 @@ class AppsController < ApplicationController
     render :manifest, :content_type => 'text/cache-manifest'
   end
 
+  def download
+    render :download
+  end
+
   private
 
   def find_app

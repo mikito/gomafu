@@ -78,5 +78,5 @@ function showContents()
 
 function showDownloadPage()
 {
-  document.contentsFrame.location.href = "app_assets/download.html";
+  document.contentsFrame.location.href = bundleId + "/app_assets/download.html";
 }

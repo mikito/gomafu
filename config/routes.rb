@@ -4,6 +4,7 @@ Gomafu::Application.routes.draw do
 
   get ":id.app" => "apps#show"
   get ":id.manifest" => "apps#manifest"
+  get ":id/app_assets/download.html" => "apps#download"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
