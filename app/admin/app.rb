@@ -61,7 +61,7 @@ ActiveAdmin.register App do
   # Upload Zip File
   member_action :upload, :method => :post do
     app = App.find(params[:id])
-    app_dir = Rails.root.join("public", app.bundle_id)
+    app_dir = Rails.root.join("public", app.bundle_id, "app")
 
     contents = params[:app]["contents"]
     
@@ -98,10 +98,10 @@ ActiveAdmin.register App do
     redirect_to admin_app_path(app), :notice => "Contents files are uploaded."
   end
 
-  # Upload Zip File
+  # Upload Icon File
   member_action :upload_icon, :method => :post do
     app = App.find(params[:id])
-    icon_dir = Rails.root.join("public", app.bundle_id, "icons")
+    icon_dir = Rails.root.join("public", app.bundle_id, "assets")
 
     FileUtils.mkdir_p(icon_dir)
 

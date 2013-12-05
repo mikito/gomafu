@@ -73,10 +73,10 @@ function updateProgress(percentage)
 
 function showContents()
 {
-  document.contentsFrame.location.href = bundleId + "/index.html";
+  document.contentsFrame.location.href = bundleId + "/app/index.html";
 }
 
 function showDownloadPage()
 {
-  document.contentsFrame.location.href = bundleId + "/app_assets/download.html";
+  document.contentsFrame.location.href = bundleId + "/assets/download.html";
 }
