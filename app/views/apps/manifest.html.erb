@@ -4,6 +4,7 @@ CACHE MANIFEST
 CACHE:
 <%= @app.bundle_id %>.app
 <%= @app.bundle_id %>/assets/icon.png
+<%= @app.bundle_id %>/assets/splash-640x1096.png
 <% @app.files.each do |file| %>
 <%= "#{@app.bundle_id}/app/#{file}" %>
 <% end %>

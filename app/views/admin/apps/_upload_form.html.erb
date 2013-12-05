@@ -1,7 +1,16 @@
 <h3>Icon</h3>
-<%= image_tag "/#{app.bundle_id}/assets/icon.png" %>
+<%= image_tag "/#{app.bundle_id}/assets/icon.png", :size => "54x54" %>
 <%= form_tag(upload_icon_admin_app_path(app), :multipart => true) do %>
   <%= file_field :app, :icon%>
+  <%= submit_tag "Upload" %>
+<% end %>
+
+<hr>
+
+<h3>Splash</h3>
+<%= image_tag "/#{app.bundle_id}/assets/splash-640x1096.png", :size => "160x280" %>
+<%= form_tag(upload_splash_admin_app_path(app), :multipart => true) do %>
+  <%= file_field :app, :splash %>
   <%= submit_tag "Upload" %>
 <% end %>
 

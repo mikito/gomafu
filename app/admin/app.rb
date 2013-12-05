@@ -115,4 +115,22 @@ ActiveAdmin.register App do
 
     redirect_to admin_app_path(app), :notice => "Icon file is uploaded."
   end
+
+  # Upload Splash File
+  member_action :upload_splash, :method => :post do
+    app = App.find(params[:id])
+    splash_dir = Rails.root.join("public", app.bundle_id, "assets")
+
+    FileUtils.mkdir_p(splash_dir)
+
+    splash = params[:app]["splash"]
+
+    File.open(File.join(splash_dir, "splash-640x1096.png"), 'wb') do |of|
+      of.write(splash.read)
+    end
+
+    app.touch
+
+    redirect_to admin_app_path(app), :notice => "Splash file is uploaded."
+  end
 end
