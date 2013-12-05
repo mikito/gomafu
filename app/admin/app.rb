@@ -53,6 +53,8 @@ ActiveAdmin.register App do
       row :updated_at
     end
 
+    render :partial => "download_url", :locals => {:app => app}
+
     render :partial => "upload_form", :locals => {:app => app}
 
     render :partial => "files", :locals => {:files => app.files}
