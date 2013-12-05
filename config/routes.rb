@@ -2,6 +2,7 @@ Gomafu::Application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
+  root 'apps#top'
   get ":id.app" => "apps#show"
   get ":id.manifest" => "apps#manifest"
   get ":id/assets/download.html" => "apps#download"

@@ -1,6 +1,11 @@
 class AppsController < ApplicationController
   before_action :find_app
 
+  def top
+    @apps = App.all
+    render :top
+  end
+
   def show
     render :app
   end
