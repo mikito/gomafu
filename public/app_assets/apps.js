@@ -57,13 +57,13 @@ function addCacheEventListener() {
 function showProgress()
 {
   document.getElementById("loading").style.display = "block";
-  document.contentsFrame.style.display = "none";
+  document.getElementById("contents").style.display = "none";
 }
 
 function hideProgress()
 {
   document.getElementById("loading").style.display = "none";
-  document.contentsFrame.style.display = "block";
+  document.getElementById("contents").style.display = "block";
 }
 
 function updateProgress(percentage)
@@ -73,10 +73,10 @@ function updateProgress(percentage)
 
 function showContents()
 {
-  document.contentsFrame.location.href = bundleId + "/index.html";
+  document.contentsFrame.location.href = bundleId + "/app/index.html";
 }
 
 function showDownloadPage()
 {
-  document.contentsFrame.location.href = "app_assets/download.html";
+  document.contentsFrame.location.href = bundleId + "/assets/download.html";
 }

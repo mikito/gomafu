@@ -1,0 +1,19 @@
+<h1>Well come to GOMAFU</h1>
+
+
+<h2>Apps</h2>
+<table>
+<% @apps.each do |app| %>
+  <tr>
+    <td>
+      <%= app.name %>
+    </td>
+    <td>
+      <%= link_to app.bundle_id + ".app", root_path + app.bundle_id + ".app" %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<hr>
+<%= link_to "admin login", admin_root_path %> 

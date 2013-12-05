@@ -24,7 +24,7 @@ ActiveAdmin.register App do
   end
 
   permit_params do
-    permitted = [:bundle_id, :status_bar_style, :name]
+    permitted = [:bundle_id, :status_bar_style, :name, :description]
     permitted
   end
   
@@ -32,6 +32,7 @@ ActiveAdmin.register App do
     f.inputs do
       f.input :bundle_id, :label => "Bundle ID"#, :input_html => { :disabled => true }
       f.input :name
+      f.input :description
       f.input :status_bar_style, :as => :select, :collection => STATUS_BAR_OPTIONS
     end
 
@@ -47,6 +48,7 @@ ActiveAdmin.register App do
 
       row :name
       row :status_bar_style
+      row :description
       row :created_at
       row :updated_at
     end
@@ -59,7 +61,7 @@ ActiveAdmin.register App do
   # Upload Zip File
   member_action :upload, :method => :post do
     app = App.find(params[:id])
-    app_dir = Rails.root.join("public", app.bundle_id)
+    app_dir = Rails.root.join("public", app.bundle_id, "app")
 
     contents = params[:app]["contents"]
     
@@ -96,10 +98,10 @@ ActiveAdmin.register App do
     redirect_to admin_app_path(app), :notice => "Contents files are uploaded."
   end
 
-  # Upload Zip File
+  # Upload Icon File
   member_action :upload_icon, :method => :post do
     app = App.find(params[:id])
-    icon_dir = Rails.root.join("public", app.bundle_id, "icons")
+    icon_dir = Rails.root.join("public", app.bundle_id, "assets")
 
     FileUtils.mkdir_p(icon_dir)
 
@@ -112,5 +114,23 @@ ActiveAdmin.register App do
     app.touch
 
     redirect_to admin_app_path(app), :notice => "Icon file is uploaded."
+  end
+
+  # Upload Splash File
+  member_action :upload_splash, :method => :post do
+    app = App.find(params[:id])
+    splash_dir = Rails.root.join("public", app.bundle_id, "assets")
+
+    FileUtils.mkdir_p(splash_dir)
+
+    splash = params[:app]["splash"]
+
+    File.open(File.join(splash_dir, "splash-640x1096.png"), 'wb') do |of|
+      of.write(splash.read)
+    end
+
+    app.touch
+
+    redirect_to admin_app_path(app), :notice => "Splash file is uploaded."
   end
 end

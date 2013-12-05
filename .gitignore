@@ -21,7 +21,6 @@ config/database.yml
 
 /public/*
 !/public/app_assets/apps.js
-!/public/app_assets/download.html
 !/public/404.html
 !/public/422.html
 !/public/500.html
