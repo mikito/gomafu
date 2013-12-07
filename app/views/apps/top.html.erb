@@ -1,19 +1,30 @@
-<h1>Welcome to GOMAFU</h1>
+<html>
+  <head>
+    <!-- home display name -->
+    <title>GOMAFU</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  </head>
+ 
+  <body>
+  <h1>Welcome to GOMAFU</h1>
 
 
-<h2>Apps</h2>
-<table>
-<% @apps.each do |app| %>
-  <tr>
-    <td>
-      <%= app.name %>
-    </td>
-    <td>
-      <%= link_to app.bundle_id + ".app", root_path + app.bundle_id + ".app" %>
-    </td>
-  </tr>
-<% end %>
-</table>
+  <h2>Apps</h2>
+  <table>
+    <% @apps.each do |app| %>
+      <tr>
+      <td>
+        <%= app.name %>
+      </td>
+      <td>
+        <%= link_to app.bundle_id + ".app", root_path + app.bundle_id + ".app" %>
+      </td>
+    </tr>
+  <% end %>
+  </table>
 
-<hr>
-<%= link_to "admin login", admin_root_path %> 
+  <hr>
+  <%= link_to "admin login", admin_root_path %> 
+
+</body>
+</html>
