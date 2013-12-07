@@ -1,7 +1,6 @@
 window.addEventListener('load', function(){ 
   if(window.navigator.standalone) {
     addCacheEventListener();
-    showContents();
   }else{
     showDownloadPage();
   } 
@@ -29,9 +28,11 @@ function addCacheEventListener() {
     console.log("cached");
     alert('データの保存が完了しました');
     hideProgress()
+    showContents();
   }, false);
 
   appCache.addEventListener('noupdate', function(e){
+    showContents();
     console.log("noupdate");
   }, false);
 
@@ -73,7 +74,8 @@ function updateProgress(percentage)
 
 function showContents()
 {
-  document.contentsFrame.location.href = bundleId + "/app/index.html";
+  //document.contentsFrame.location.href = bundleId + "/app/index.html";
+  window.location = bundleId + "/app/index.html";
 }
 
 function showDownloadPage()
